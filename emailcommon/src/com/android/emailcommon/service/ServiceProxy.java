@@ -100,22 +100,6 @@ public abstract class ServiceProxy {
 
     private class ProxyConnection implements ServiceConnection {
      
-        private boolean serviceDisconnected = false;
-     
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            serviceDisconnected=false;
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            serviceDisconnected=true;
-        }
-
-        public boolean isServiceDisconnected() {
-            return serviceDisconnected;
-        }
-     
         @Override
         public void onServiceConnected(ComponentName name, IBinder binder) {
             if (DEBUG_PROXY) {
@@ -137,12 +121,11 @@ public abstract class ServiceProxy {
                     } finally {
                         // Make sure that we unbind the mConnection even on exceptions in the
                         // task provided by the subclass.
-                     if (!isServiceDisconnected()) {
                         try {
                             // Each ServiceProxy handles just one task, so we unbind after we're
                             // done with our work.
                             mContext.unbindService(mConnection);
-                        } catch (RuntimeException e) {
+                        } catch (Exception e) {
                             // The exceptions that are thrown here look like IllegalStateException,
                             // IllegalArgumentException and RuntimeException. Catching
                             // RuntimeException which get them all. Reasons for these exceptions
@@ -151,8 +134,7 @@ public abstract class ServiceProxy {
                             // This is harmless, but we've got to catch it.
                             LogUtils.e(mTag, e,
                                     "RuntimeException when trying to unbind from service");
-                        }
-                     }
+                        }            
                     }
                     synchronized(mConnection) {
                         mTaskCompleted = true;
