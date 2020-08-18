@@ -20,4 +20,7 @@
     <string name="delete_account_confirmation_msg">This will delete all the settings and emails of the account <xliff:g id="account">%s</xliff:g>. This operation cannot be undone.\n\nContinue?</string>
     <string name="deleting_account_msg">Deleting account\u2026</string>
     <string name="delete_account_failed">Couldn\'t delete the account</string>
+
+    <string name="battery_optimization_notification_title">Background usage required</string>
+    <string name="battery_optimization_notification_imap_text">For IMAP push notifications, the Email app needs to run in the background.\nTouch here to allow background usage.</string>
 </resources>
