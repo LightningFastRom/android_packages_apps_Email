@@ -53,6 +53,7 @@ LOCAL_STATIC_ANDROID_LIBRARIES := \
     android-support-v7-appcompat \
     android-support-v7-gridlayout \
     android-support-v13
+	androidx-constraintlayout_constraintlayout
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
     android-support-annotations \
