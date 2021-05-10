@@ -232,7 +232,7 @@ public abstract class ServiceProxy {
      */
     public boolean test() {
         try {
-            boolean returnValue = setTask(new ProxyTask() {
+            return setTask(new ProxyTask() {
                 @Override
                 public void run() throws RemoteException {
                     if (DEBUG_PROXY) {
@@ -241,10 +241,6 @@ public abstract class ServiceProxy {
                     }
                 }
             }, "test");
-            if (returnValue) {
-                mContext.unbindService(mConnection);
-            }
-            return returnValue;
         } catch (Exception e) {
             // For any failure, return false.
             return false;
